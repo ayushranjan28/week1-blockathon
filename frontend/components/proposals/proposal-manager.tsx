@@ -159,15 +159,15 @@ export function ProposalManager({
   const sortedProposals = [...filteredProposals].sort((a, b) => {
     switch (sortBy) {
       case 'newest':
-        return b.createdAt - a.createdAt
+        return Number(b.createdAt) - Number(a.createdAt)
       case 'oldest':
-        return a.createdAt - b.createdAt
+        return Number(a.createdAt) - Number(b.createdAt)
       case 'budget-high':
-        return b.budget - a.budget
+        return Number(b.budget) - Number(a.budget)
       case 'budget-low':
-        return a.budget - b.budget
+        return Number(a.budget) - Number(b.budget)
       case 'votes':
-        return b.votes - a.votes
+        return Number(b.votes) - Number(a.votes)
       default:
         return 0
     }
@@ -348,7 +348,15 @@ export function ProposalManager({
 
       {/* Proposals Display */}
       {loading ? (
-        <LoadingState message="Loading proposals..." />
+        <div className="flex items-center justify-center p-12">
+          <LoadingSpinner size="lg" />
+          <ResponsiveText 
+            size={{ default: 'base' }}
+            className="ml-3"
+          >
+            Loading proposals...
+          </ResponsiveText>
+        </div>
       ) : sortedProposals.length === 0 ? (
         <EnhancedCard variant="glass">
           <EnhancedCardContent className="p-12 text-center">
@@ -368,7 +376,7 @@ export function ProposalManager({
               Try adjusting your search criteria or create a new proposal.
             </ResponsiveText>
             {userType === 'citizen' && onCreateProposal && (
-              <EnhancedButton variant="primary" onClick={onCreateProposal}>
+              <EnhancedButton variant="default" onClick={onCreateProposal}>
                 <Plus className="h-4 w-4 mr-2" />
                 Create First Proposal
               </EnhancedButton>
@@ -513,7 +521,7 @@ function ProposalCard({ proposal, userType, onAction }: ProposalCardProps) {
               View
             </EnhancedButton>
             {userType === 'citizen' && proposal.status === 'active' && (
-              <EnhancedButton variant="primary" size="sm">
+              <EnhancedButton variant="default" size="sm">
                 Vote
               </EnhancedButton>
             )}
@@ -610,7 +618,7 @@ function ProposalListItem({ proposal, userType, onAction }: ProposalListItemProp
                 <Eye className="h-4 w-4" />
               </EnhancedButton>
               {userType === 'citizen' && proposal.status === 'active' && (
-                <EnhancedButton variant="primary" size="sm">
+                <EnhancedButton variant="default" size="sm">
                   Vote
                 </EnhancedButton>
               )}

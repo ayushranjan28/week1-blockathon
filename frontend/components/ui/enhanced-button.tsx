@@ -92,6 +92,7 @@ const EnhancedButton = React.forwardRef<HTMLButtonElement, EnhancedButtonProps>(
     )
 
     if (animation === 'glow' || animation === 'float') {
+      const { onAnimationStart, onAnimationEnd, onDragStart, onDragEnd, onDrag, ...motionProps } = props
       return (
         <motion.button
           className={cn(enhancedButtonVariants({ variant, size, animation: 'none', className }))}
@@ -99,7 +100,7 @@ const EnhancedButton = React.forwardRef<HTMLButtonElement, EnhancedButtonProps>(
           disabled={isDisabled}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          {...props}
+          {...motionProps}
         >
           {buttonContent}
         </motion.button>

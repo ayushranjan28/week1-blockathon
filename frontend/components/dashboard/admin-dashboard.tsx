@@ -306,7 +306,7 @@ export function AdminDashboard(props: AdminDashboardProps = {}) {
                       </ResponsiveText>
                       <ResponsiveText 
                         size={{ default: 'xs' }}
-                        color={stat.changeType === 'positive' ? 'success' : stat.changeType === 'negative' ? 'error' : 'muted'}
+                        color={stat.changeType === 'positive' ? 'primary' : stat.changeType === 'neutral' ? 'muted' : 'muted'}
                       >
                         {stat.change} vs last month
                       </ResponsiveText>

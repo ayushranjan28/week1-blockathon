@@ -233,7 +233,7 @@ export function CitizenDashboard() {
             </ResponsiveText>
           </div>
           <Link href="/create">
-            <EnhancedButton variant="primary" size="lg">
+            <EnhancedButton variant="default" size="lg">
               <Plus className="h-4 w-4 mr-2" />
               Create Proposal
             </EnhancedButton>

@@ -119,8 +119,8 @@ export function GovernanceStats() {
                 {stat.value}
               </div>
               <div className={`text-xs ${
-                stat.changeType === 'positive' ? 'text-green-600' : 
-                stat.changeType === 'negative' ? 'text-red-600' : 
+                stat.changeType === 'positive' ? 'text-green-600' :
+                stat.changeType === 'neutral' ? 'text-gray-500' :
                 'text-gray-500'
               }`}>
                 {stat.change}

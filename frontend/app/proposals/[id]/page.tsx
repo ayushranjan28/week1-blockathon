@@ -29,7 +29,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { VoteModal } from '@/components/proposals/vote-modal'
 import { CommentSection } from '@/components/proposals/comment-section'
 import { ProposalChart } from '@/components/proposals/proposal-chart'
-import { Proposal, Vote } from '@/types'
+import { Proposal, Vote, ProposalStatus } from '@/types'
 import { formatAddress, formatCurrency, formatDate, formatRelativeTime, getProposalStatusColor, getCategoryColor } from '@/lib/utils'
 import { smartContractService, getProposalStateText } from '@/lib/smart-contract-service'
 import { useAccount } from 'wagmi'
@@ -154,7 +154,7 @@ export default function ProposalDetailPage() {
             proposer: contractProposal.proposer,
             budget: contractProposal.budget,
             category: contractProposal.category,
-            status: contractProposal.state.toLowerCase(),
+            status: contractProposal.state.toLowerCase() as ProposalStatus,
             createdAt: contractProposal.createdAt,
             startBlock: contractProposal.snapshot,
             endBlock: Math.floor(contractProposal.deadline / 1000), // Convert to block (rough estimation)
@@ -165,6 +165,12 @@ export default function ProposalDetailPage() {
             quorum: contractProposal.quorum,
             executed: contractProposal.state === 'executed',
             canceled: contractProposal.state === 'canceled'
+          }
+          
+          // Add deadline field for VoteModal compatibility
+          const proposalWithDeadline = {
+            ...transformedProposal,
+            deadline: new Date(contractProposal.deadline).toISOString()
           }
           
           setProposal(transformedProposal)
@@ -226,14 +232,14 @@ export default function ProposalDetailPage() {
     return 'neutral'
   }
 
-  const handleVote = (support: 'for' | 'against' | 'abstain', reason?: string) => {
+  const handleVote = () => {
     if (!isConnected) {
       toast.error('Please connect your wallet to vote')
       return
     }
 
     // In real app, submit vote to blockchain
-    toast.success(`Vote submitted: ${support}`)
+    toast.success('Vote submitted successfully!')
     setShowVoteModal(false)
   }
 
@@ -473,10 +479,16 @@ export default function ProposalDetailPage() {
       </div>
 
       {/* Vote Modal */}
-      {showVoteModal && (
+      {showVoteModal && proposal && (
         <VoteModal
-          proposal={proposal}
-          onVote={handleVote}
+          proposal={{
+            ...proposal,
+            deadline: new Date(proposal.endBlock * 1000).toISOString()
+          }}
+          userVotingPower={100}
+          hasVoted={!!userVote}
+          userVote={userVote?.support === 'for' ? 1 : userVote?.support === 'against' ? 0 : 2}
+          onVoteSubmitted={handleVote}
           onClose={() => setShowVoteModal(false)}
         />
       )}

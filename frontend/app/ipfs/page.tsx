@@ -7,7 +7,7 @@ import {
   Settings
 } from 'lucide-react'
 import { EnhancedButton } from '@/components/ui/enhanced-button'
-import { ResponsiveContainer, ResponsiveText } from '@/components/ui/responsive-container'
+import { ResponsiveContainer, ResponsiveText, ResponsiveGrid } from '@/components/ui/responsive-container'
 import { ThemeToggleSimple } from '@/components/ui/theme-toggle'
 import { ConnectWallet } from '@/components/wallet/connect-wallet'
 import { IPFSUploader } from '@/components/ipfs/ipfs-uploader'

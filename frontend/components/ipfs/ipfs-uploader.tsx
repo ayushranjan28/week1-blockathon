@@ -96,7 +96,7 @@ export function IPFSUploader() {
       formData.append('file', file)
       
       // Upload to IPFS via backend
-      const response = await apiService.ipfs.uploadFile(formData)
+      const response = await apiService.uploadFile(file)
       
       // Update file with success status
       setUploadedFiles(prev => prev.map(f => 

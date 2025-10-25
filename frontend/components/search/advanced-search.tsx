@@ -334,7 +334,7 @@ export function AdvancedSearch({ onFiltersChange, initialFilters = {} }: Advance
                 <div className="space-y-3">
                   <Slider
                     value={filters.budgetRange}
-                    onValueChange={(value) => updateFilter('budgetRange', value)}
+                    onValueChange={(value: [number, number]) => updateFilter('budgetRange', value)}
                     max={1000000}
                     min={0}
                     step={1000}

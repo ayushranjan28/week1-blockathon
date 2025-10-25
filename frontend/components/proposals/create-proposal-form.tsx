@@ -180,7 +180,7 @@ export function CreateProposalForm() {
     
     try {
       // Upload attachments if any
-      let uploadedAttachments = []
+      let uploadedAttachments: any[] = []
       if (attachments.length > 0) {
         uploadedAttachments = await uploadAttachments()
       }
@@ -214,7 +214,7 @@ export function CreateProposalForm() {
   }
 
   return (
-    <ResponsiveContainer maxWidth="4xl" padding="lg">
+    <ResponsiveContainer maxWidth="2xl" padding="lg">
       <div className="space-y-8">
         {/* Header */}
         <motion.div
@@ -515,7 +515,7 @@ export function CreateProposalForm() {
                   </EnhancedButton>
                   <EnhancedButton
                     type="submit"
-                    variant="primary"
+                    variant="default"
                     disabled={isSubmitting}
                     className="min-w-[140px]"
                   >

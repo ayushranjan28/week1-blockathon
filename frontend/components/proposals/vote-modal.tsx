@@ -426,7 +426,7 @@ export function VoteModal({
               </EnhancedButton>
               {canVote && (
                 <EnhancedButton
-                  variant="primary"
+                  variant="default"
                   onClick={handleVote}
                   disabled={isSubmitting || selectedVote === null}
                   className="min-w-[120px]"

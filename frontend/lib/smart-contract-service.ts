@@ -146,7 +146,7 @@ export class SmartContractService {
         address: CONTRACT_ADDRESSES.CIVIC_DAO as `0x${string}`,
         abi: CIVIC_DAO_ABI,
         client: walletClient
-      })
+      }) as any
 
       const budgetWei = parseEther(budget)
 
@@ -182,7 +182,7 @@ export class SmartContractService {
         address: CONTRACT_ADDRESSES.CIVIC_DAO as `0x${string}`,
         abi: CIVIC_DAO_ABI,
         client: walletClient
-      })
+      }) as any
 
       const hash = await daoContract.write.castVoteWithReason([
         BigInt(proposalId),
@@ -244,7 +244,7 @@ export class SmartContractService {
         address: CONTRACT_ADDRESSES.CIVIC_DAO as `0x${string}`,
         abi: CIVIC_DAO_ABI,
         client: walletClient
-      })
+      }) as any
 
       const hash = await daoContract.write.verifyZKIdentity([
         identityHash,
@@ -264,7 +264,7 @@ export class SmartContractService {
     try {
       const daoContract = this.getCivicDAOContract()
       const categories = await daoContract.read.getCategories()
-      return categories
+      return [...categories]
     } catch (error) {
       console.error('Error getting categories:', error)
       return []
