@@ -15,9 +15,15 @@ import {
   CIVIC_DAO_ABI, 
   CIVIC_TOKEN_ABI, 
   CONTRACT_ADDRESSES, 
-  ProposalState, 
-  VoteSupport 
+  ProposalState
 } from './contracts'
+
+// Vote support enum
+export enum VoteSupport {
+  Against = 0,
+  For = 1,
+  Abstain = 2
+}
 
 // Create blockchain clients
 const getChain = () => {

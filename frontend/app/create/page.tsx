@@ -147,7 +147,7 @@ export default function CreateProposalPage() {
 
       // Prepare proposal data for smart contract
       const targets: `0x${string}`[] = data.targets?.map(t => t as `0x${string}`) || []
-      const values: bigint[] = data.values?.map(v => parseEther(v || '0')) || [0n]
+      const values: bigint[] = data.values?.map(v => parseEther(v || '0')) || [BigInt(0)]
       const calldatas: `0x${string}`[] = data.calldatas?.map(c => c as `0x${string}`) || ['0x']
       
       const description = `${data.title}\n\n${data.description}`
